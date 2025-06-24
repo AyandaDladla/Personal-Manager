@@ -1,19 +1,31 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/dashboard";
+import AddEvent from "./components/addevent";
+import Help from "./components/help";
+import { TodoProvider } from "./components/Todo";
 
-const App = () => {
-  return (
-    <div>
-      <h1>Personal Manager</h1>
-      <Dashboard />
-    </div>
-  );
-};
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Dashboard />,
+  },
+  {
+    path: "/addevent",
+    element: <AddEvent />,
+  },
+  {
+    path: "/help",
+    element: <Help />,
+  },
+]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <TodoProvider>
+      <RouterProvider router={router} />
+    </TodoProvider>
   </StrictMode>
 );
