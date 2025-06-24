@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTodos } from "./Todo";
 import NavBar from "../routes/navbar";
 
-const AddEvent = () => {
+function AddEvent({ onLogout }) {
   const { todos, setTodos } = useTodos();
   const [form, setForm] = useState({
     title: "",
@@ -31,6 +31,7 @@ const AddEvent = () => {
 
   return (
     <>
+      <button onClick={onLogout}>Logout</button>
       <NavBar />
       <div style={{ maxWidth: 500, margin: "2rem auto" }}>
         <h2>Add Todo</h2>
@@ -73,6 +74,6 @@ const AddEvent = () => {
       </div>
     </>
   );
-};
+}
 
 export default AddEvent;

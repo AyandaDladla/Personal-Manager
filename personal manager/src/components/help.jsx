@@ -1,9 +1,10 @@
 import React from "react";
 import NavBar from "../routes/navbar";
 
-function Help() {
+function Help({ onLogout }) {
   return (
     <>
+      <button onClick={onLogout}>Logout</button>
       <NavBar />
       <div>
         <div>

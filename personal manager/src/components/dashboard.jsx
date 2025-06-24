@@ -1,8 +1,10 @@
 import React from "react";
 import { useTodos } from "./Todo";
 import NavBar from "../routes/navbar";
+import RegistrationForm from "./RegistrationForm";
+import { useEffect } from "react";
 
-const Dashboard = () => {
+function Dashboard({ onLogout }) {
   const { todos, setTodos } = useTodos();
 
   const toggleCompleted = (id) => {
@@ -17,8 +19,17 @@ const Dashboard = () => {
     setTodos(todos.filter((todo) => !todo.completed));
   };
 
+  // Get the first name from RegistrationForm if available
+  const userName = RegistrationForm?.firstName || "User";
+
+  // Save todos to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
   return (
     <>
+      <button onClick={onLogout}>Logout</button>
       <NavBar />
       <div style={{ maxWidth: 500, margin: "2rem auto" }}>
         <h2>Todo List</h2>
@@ -76,6 +87,6 @@ const Dashboard = () => {
       </div>
     </>
   );
-};
+}
 
 export default Dashboard;
