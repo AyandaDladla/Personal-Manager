@@ -1,11 +1,11 @@
 import React from "react";
-import { useTodos } from "./Todo";
 import NavBar from "../routes/navbar";
 import RegistrationForm from "./RegistrationForm";
 import { useEffect } from "react";
+import { useAppContext } from "./AppContext";
 
 function Dashboard({ onLogout }) {
-  const { todos, setTodos } = useTodos();
+  const { todos, setTodos } = useAppContext();
 
   const toggleCompleted = (id) => {
     setTodos(
@@ -18,14 +18,10 @@ function Dashboard({ onLogout }) {
   const removeCompleted = () => {
     setTodos(todos.filter((todo) => !todo.completed));
   };
-
-  // Get the first name from RegistrationForm if available
-  const userName = RegistrationForm?.firstName || "User";
-
   // Save todos to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+  //useEffect(() => {
+  //  localStorage.setItem("todos", JSON.stringify(todos));
+  //}, [todos]);
 
   return (
     <>

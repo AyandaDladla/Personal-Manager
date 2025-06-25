@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useTodos } from "./Todo";
 import NavBar from "../routes/navbar";
+import { useAppContext } from "./AppContext";
 
 function AddEvent({ onLogout }) {
-  const { todos, setTodos } = useTodos();
+  const { todos, setTodos, user } = useAppContext();
   const [form, setForm] = useState({
     title: "",
     description: "",

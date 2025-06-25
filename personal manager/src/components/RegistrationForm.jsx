@@ -55,8 +55,15 @@ const RegistrationForm = ({ onRegister }) => {
       confirmPassword: "",
     },
     validate,
-    onSubmit: (values) => {
-      onRegister(values); // Pass values up to App
+    onSubmit: (values, { setSubmitting, resetForm }) => {
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      users.push(values);
+      localStorage.setItem("users", JSON.stringify(users));
+      if (typeof onRegister === "function") {
+        onRegister(values); // Pass values up to App
+      }
+      setSubmitting(false);
+      resetForm();
     },
   });
 

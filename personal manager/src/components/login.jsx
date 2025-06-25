@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useFormik } from "formik";
 import RegistrationForm from "./RegistrationForm";
+import { useAppContext } from "./AppContext";
+
+// Removed unused LoginComponent and misplaced login logic
 
 const validate = (values) => {
   const errors = {};
@@ -21,20 +24,40 @@ const validate = (values) => {
 };
 
 const SignupForm = ({ onLogin, onShowRegister, registeredUser }) => {
+  const { setUser } = useAppContext();
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     validate,
-    onSubmit: (values) => {
-      onLogin(values); // App will compare with registeredUser
+    onSubmit: (values, { setSubmitting, setErrors }) => {
+      const errors = validate(values);
+      if (Object.keys(errors).length > 0) {
+        setErrors(errors);
+        setSubmitting(false);
+        return;
+      }
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      const foundUser = users.find(
+        (u) => u.email === values.email && u.password === values.password
+      );
+      if (foundUser) {
+        setUser(foundUser);
+        sessionStorage.setItem("user", JSON.stringify(foundUser));
+        onLogin(values); // App will compare with registeredUser
+      } else {
+        setErrors({
+          email: "Invalid email or password",
+          password: "Invalid email or password",
+        });
+        setSubmitting(false);
+      }
     },
   });
 
   return (
     <div>
-      <h2>Login</h2>
       <form onSubmit={formik.handleSubmit}>
         <label htmlFor="email">Email Address</label>
         <input
