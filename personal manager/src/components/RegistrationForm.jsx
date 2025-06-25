@@ -71,9 +71,8 @@ const RegistrationForm = ({ onRegister }) => {
   // (handleRegister removed - not needed here)
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={formik.handleSubmit}>
+    <div className="registration-wrapper">
+      <form className="registration-form" onSubmit={formik.handleSubmit}>
         <label htmlFor="firstName">First Name</label>
         <input
           id="firstName"

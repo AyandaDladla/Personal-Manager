@@ -8,7 +8,7 @@ export function useAppContext() {
 
 export function AppProvider({ children }) {
   const [user, setUser] = useState(() => {
-    const stored = sessionStorage.getItem("user");
+    const stored = localStorage.getItem("user");
     return stored ? JSON.parse(stored) : null;
   });
 

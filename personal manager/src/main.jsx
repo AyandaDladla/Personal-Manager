@@ -10,9 +10,8 @@ import Login from "./components/login";
 import { AppProvider, useAppContext } from "./components/AppContext";
 
 function App() {
-  const { user, setUser, todos, setTodos } = useAppContext();
+  const { user, setUser } = useAppContext();
   const [showRegister, setShowRegister] = useState(false);
-  const [registeredUser, setRegisteredUser] = useState(null);
 
   // Registration
   const handleRegister = (values) => {
@@ -23,7 +22,7 @@ function App() {
     localStorage.setItem("users", JSON.stringify(users));
     // Set as current user
     setUser(userWithUsername);
-    sessionStorage.setItem("user", JSON.stringify(userWithUsername));
+    localStorage.setItem("user", JSON.stringify(userWithUsername)); // <-- changed
     setShowRegister(false);
   };
 
@@ -35,17 +34,19 @@ function App() {
     );
     if (foundUser) {
       setUser(foundUser);
-      sessionStorage.setItem("user", JSON.stringify(foundUser));
+      localStorage.setItem("user", JSON.stringify(foundUser)); // <-- changed
     } else {
       alert("Invalid credentials or user not registered.");
     }
   };
 
+  // Logout
   const handleLogout = () => {
-    sessionStorage.removeItem("user");
+    localStorage.removeItem("user"); // <-- changed
     setUser(null);
   };
 
+  // Show registration or login if not logged in
   if (!user) {
     if (showRegister) {
       return (
@@ -59,23 +60,23 @@ function App() {
       <Login
         onLogin={handleLogin}
         onShowRegister={() => setShowRegister(true)}
-        registeredUser={registeredUser}
       />
     );
   }
 
+  // Router for logged-in users
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Dashboard userEmail={user.email} onLogout={handleLogout} />,
+      element: <Dashboard onLogout={handleLogout} />,
     },
     {
       path: "/addevent",
-      element: <AddEvent userEmail={user.email} onLogout={handleLogout} />,
+      element: <AddEvent onLogout={handleLogout} />,
     },
     {
       path: "/help",
-      element: <Help userEmail={user.email} onLogout={handleLogout} />,
+      element: <Help onLogout={handleLogout} />,
     },
   ]);
 
