@@ -1,12 +1,45 @@
-# React + Vite
+# Personal Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based personal management application that helps users organize their daily tasks and events.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- User registration and login
+- Dashboard for overview
+- Todo list management
+- Event management
+- Help and support
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React 19.1.0
+- React Router DOM for navigation
+- Formik for form handling
+- Vite for build tooling
+- ESLint for code linting
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (version 14 or higher)
+- npm
+
+### Installation
+
+1. Clone the repository
+2. Navigate to the project directory
+3. Install dependencies:
+   ```
+   npm install
+   ```
+
+### Running the Application
+
+To start the development server:
+
+```
+npm run dev
+```
+
+The application will be available at `http://localhost:5173`
