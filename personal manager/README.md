@@ -10,14 +10,6 @@ A React-based personal management application that helps users organize their da
 - Event management
 - Help and support
 
-## Technologies Used
-
-- React 19.1.0
-- React Router DOM for navigation
-- Formik for form handling
-- Vite for build tooling
-- ESLint for code linting
-
 ## Getting Started
 
 ### Prerequisites
